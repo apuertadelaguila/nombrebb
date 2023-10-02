@@ -1,0 +1,22 @@
+<%= form_for @votacion do |f| %>
+    <%= f.hidden_field :user_id, value: @usuario_actual.id %>
+    <%= f.hidden_field :bebe_1_id, value: @bebe_1.id %>
+    <%= f.hidden_field :bebe_2_id, value: @bebe_2.id %>
+
+    <h2 class="text-center">Duelo de Nombres de Bebés</h2>
+
+    <div class="w-100 shadow rounded p-3 col-6 p-5">
+        <div class="text-center mb-3">
+        <% [@bebe_1, @bebe_2].each do |bebe| %>
+            <label class="nombre-capsula" for="bebe_<%= bebe.id %>">
+            <span class="nombre <%= f.object.bebe_id == bebe.id ? 'seleccionado' : '' %>">
+                <%= bebe.nombre %>
+                <%= f.radio_button :bebe_id, bebe.id, id: "bebe_#{bebe.id}", class: "nombre-radio" %>
+            </span>
+            </label>
+        <% end %>
+        </div>
+        
+        <%= f.submit "Votar", class: "btn btn-primary d-block mx-auto px-5" %>
+    </div>
+<% end %>

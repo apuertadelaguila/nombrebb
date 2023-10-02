@@ -1,0 +1,88 @@
+<!-- Button trigger modal -->
+<% if current_user.has_role?([:admin, :padres])%>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Añadir nombre
+    </button>
+<% end %>
+
+<h2>Bebés Hombres</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Prioridad</th>
+      <th>Puntuación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bebes.each do |bebe| %>
+      <% if bebe.sexo == 'Hombre' %>
+        <tr>
+          <td><%= bebe.nombre %></td>
+          <td><%= bebe.prioridad %></td>
+          <td><%= bebe.votacions.count %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Bebés Mujeres</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Prioridad</th>
+      <th>Puntuación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bebes.each do |bebe| %>
+      <% if bebe.sexo == 'Mujer' %>
+        <tr>
+          <td><%= bebe.nombre %></td>
+          <td><%= bebe.prioridad %></td>
+          <td><%= bebe.votacions.count %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_user.votacions.any? %>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+        Reinicia tus votos
+    </button>
+<% end %>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir nombre del bebé</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', bebe: @bebe_new %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Estás seguro de que quieres reiniciar tus votos?</h5>
+      </div>
+      <div class="modal-footer">
+        <%= button_to 'Reiniciar', reiniciar_votos_path, method: :delete, class: 'btn btn-danger' %>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
