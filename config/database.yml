@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: nombreBB_production
-  username: nombreBB
-  password: <%= ENV["NOMBREBB_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("DB_POOL") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>

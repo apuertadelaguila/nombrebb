@@ -23,6 +23,9 @@ class VotacionesController < ApplicationController
         @enfrentamiento = Enfrentamiento.new(enfrentamiento_params)
 
         if @votacion.save && @enfrentamiento.save
+            bebe = Bebe.find(params[:votacion][:bebe_id])
+            bebe.puntuacion += 1
+            bebe.save!
             flash[:success] = '¡Voto registrado con éxito!'
         else
             flash[:error] = 'No se pudo registrar el voto.'
@@ -101,7 +104,7 @@ class VotacionesController < ApplicationController
         # Consulta la tabla Enfrentamientos para obtener las combinaciones de enfrentamientos registradas
         enfrentamientos = Enfrentamiento.where(user_id: @usuario_actual)
         enfrentamientos_registrados = enfrentamientos.map { |enfrentamiento| [enfrentamiento.bebe_1_id, enfrentamiento.bebe_2_id] }
-        
+
         enfrentamientos_registrados
     end
 end

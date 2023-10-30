@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_27_211658) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_28_102353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,6 +22,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_211658) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "created_by"
+  end
+
+  create_table "competition_votes", force: :cascade do |t|
+    t.bigint "competition_id", null: false
+    t.bigint "bebe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "created_by"
+    t.index ["bebe_id"], name: "index_competition_votes_on_bebe_id"
+    t.index ["competition_id"], name: "index_competition_votes_on_competition_id"
+  end
+
+  create_table "competitions", force: :cascade do |t|
+    t.integer "bebe_1"
+    t.integer "bebe_2"
+    t.integer "ganador"
+    t.integer "ronda"
+    t.string "lado"
+    t.string "posicion"
+    t.string "sexo"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "enfrentamientos", force: :cascade do |t|
@@ -87,6 +110,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_211658) do
     t.index ["user_id"], name: "index_votacions_on_user_id"
   end
 
+  add_foreign_key "competition_votes", "bebes"
+  add_foreign_key "competition_votes", "competitions"
   add_foreign_key "enfrentamientos", "users"
   add_foreign_key "votacions", "bebes"
   add_foreign_key "votacions", "users"

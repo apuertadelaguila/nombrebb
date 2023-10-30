@@ -1,0 +1,511 @@
+<% competicion_izquierda_ronda_1 = @competitions_izquierda_femenina&.select { |c| c.ronda == 1 } %>
+<% competicion_derecha_ronda_1 = @competitions_derecha_femenina&.select { |c| c.ronda == 1 } %>
+<% competicion_izquierda_ronda_2 = @competitions_izquierda_femenina&.select { |c| c.ronda == 2 } %>
+<% competicion_derecha_ronda_2 = @competitions_derecha_femenina&.select { |c| c.ronda == 2 } %>
+<% competicion_izquierda_ronda_3 = @competitions_izquierda_femenina&.select { |c| c.ronda == 3 } %>
+<% competicion_derecha_ronda_3 = @competitions_derecha_femenina&.select { |c| c.ronda == 3 } %>
+
+<h1>Cuadrante masculino de nombres de BEBÉS!!!!</h1>
+<main id="tournament">
+  <ul class="round round-1">
+    <li class="spacer">&nbsp;</li>
+
+    <% competicion_izquierda_ronda_1.each do |competition|  %>
+        <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+            <% if competition&.ganador == competition.bebe_1 %>
+                <strong><%= competition.bebe_1.nombre %></strong>
+            <% elsif competition.ganador.present? %>
+                <del><%= competition.bebe_1.nombre %></del>
+            <% else %>
+                <%= competition.bebe_1.nombre %>
+            <% end %>
+
+            <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                <span></span>
+            <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                    <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                <% end %>
+            <% elsif competition.ganador.blank? %>
+                <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                    <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                <% end %>
+            <% else %>
+                <span></span>
+            <% end %>
+        </li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+            <% if competition&.ganador == competition.bebe_2 %>
+                <strong><%= competition.bebe_2.nombre %></strong>
+            <% elsif competition.ganador.present? %>
+                <del><%= competition.bebe_2.nombre %></del>
+            <% else %>
+                <%= competition.bebe_2.nombre %>
+            <% end %>
+
+            <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                <span></span>
+            <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                    <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                <% end %>
+            <% elsif competition.ganador.blank? %>
+                <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                    <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                <% end %>
+            <% else %>
+                <span></span>
+            <% end %>
+        </li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+
+  </ul>
+  <ul class="round round-2">
+    <li class="spacer">&nbsp;</li>
+    
+    <% if competicion_izquierda_ronda_2.any? %>
+        <% competicion_izquierda_ronda_2.each do |competition|  %>
+            <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+                <% if competition&.ganador == competition.bebe_1 %>
+                    <strong><%= competition.bebe_1.nombre %></strong>
+                <% elsif competition.ganador.present? %>
+                    <del><%= competition.bebe_1.nombre %></del>
+                <% else %>
+                    <%= competition.bebe_1.nombre %>
+                <% end %>
+
+                <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                    <span></span>
+                <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                    <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                        <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                    <% end %>
+                <% elsif competition.ganador.blank? %>
+                    <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                        <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                    <% end %>
+                <% else %>
+                    <span></span>
+                <% end %>
+            </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+                <% if competition&.ganador == competition.bebe_2 %>
+                    <strong><%= competition.bebe_2.nombre %></strong>
+                <% elsif competition.ganador.present? %>
+                    <del><%= competition.bebe_2.nombre %></del>
+                <% else %>
+                    <%= competition.bebe_2.nombre %>
+                <% end %>
+
+                <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                    <span></span>
+                <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                    <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                        <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                    <% end %>
+                <% elsif competition.ganador.blank? %>
+                    <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                        <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                    <% end %>
+                <% else %>
+                    <span></span>
+                <% end %>
+            </li>
+            <li class="spacer">&nbsp;</li>
+            <% if competicion_izquierda_ronda_2.count == 1 %>
+                <li class="game game-top"></li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom "></li>
+                <li class="spacer">&nbsp;</li>
+            <% end %>
+        <% end %>
+    <% else %>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+    
+  </ul>
+  <ul class="round round-3">
+    <li class="spacer">&nbsp;</li>
+    
+    <% if competicion_izquierda_ronda_3.any? %>
+        <% competicion_izquierda_ronda_3.each do |competition|  %>
+                <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+                    <% if competition&.ganador == competition.bebe_1 %>
+                        <strong><%= competition.bebe_1.nombre %></strong>
+                    <% elsif competition.ganador.present? %>
+                        <del><%= competition.bebe_1.nombre %></del>
+                    <% else %>
+                        <%= competition.bebe_1.nombre %>
+                    <% end %>
+
+                    <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                        <span></span>
+                    <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                        <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                            <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                        <% end %>
+                    <% elsif competition.ganador.blank? %>
+                        <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                            <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                        <% end %>
+                    <% else %>
+                        <span></span>
+                    <% end %>
+                </li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+                    <% if competition&.ganador == competition.bebe_2 %>
+                        <strong><%= competition.bebe_2.nombre %></strong>
+                    <% elsif competition.ganador.present? %>
+                        <del><%= competition.bebe_2.nombre %></del>
+                    <% else %>
+                        <%= competition.bebe_2.nombre %>
+                    <% end %>
+
+                    <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                        <span></span>
+                    <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                        <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                            <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                        <% end %>
+                    <% elsif competition.ganador.blank? %>
+                        <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                            <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                        <% end %>
+                    <% else %>
+                        <span></span>
+                    <% end %>
+                </li>
+                <li class="spacer">&nbsp;</li>
+        <% end %>
+    <% else %>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+  </ul>
+  <ul class="round round-4">
+    <li class="spacer">&nbsp;</li>
+    <% if @final_femenina.present? %>
+        <li class="game game-top d-flex justify-content-between <% @final_femenina.ganador == @final_femenina.bebe_1 ? 'winner' : ''%>">
+            <% if @final_femenina&.ganador == @final_femenina.bebe_1 %>
+                <strong><%= @final_femenina.bebe_1.nombre %></strong>
+            <% elsif @final_femenina.ganador.present? %>
+                <del><%= @final_femenina.bebe_1.nombre %></del>
+            <% else %>
+                <%= @final_femenina.bebe_1.nombre %>
+            <% end %>
+            <% if voted_by_user?(@final_femenina, @final_femenina.bebe_2, current_user)%>
+                <span></span>
+            <% elsif !voted_by_user?(@final_femenina, @final_femenina.bebe_1, current_user) %>
+                <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                    <%= form.hidden_field :competition_id, value: @final_femenina.id %>
+                    <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_1.id %>
+                    <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                <% end %>
+            <% elsif competition.ganador.blank? %>
+                <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                    <%= form.hidden_field :competition_id, value: @final_femenina.id %>
+                    <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_1.id %>
+                    <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                <% end %>
+            <% else %>
+                <span></span>
+            <% end %>
+        </li>
+        <li class="spacer">&nbsp;</li>
+    <% else %>
+        <li class="game game-top winner"></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+  </ul>
+</main>
+
+<main id="tournament">
+  <ul class="round round-1">
+    <li class="spacer">&nbsp;</li>
+
+    <% competicion_derecha_ronda_1.each do |competition|  %>
+        <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+            <% if competition&.ganador == competition.bebe_1 %>
+                <strong><%= competition.bebe_1.nombre %></strong>
+            <% elsif competition.ganador.present? %>
+                <del><%= competition.bebe_1.nombre %></del>
+            <% else %>
+                <%= competition.bebe_1.nombre %>
+            <% end %>
+
+            <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                <span></span>
+            <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                    <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                <% end %>
+            <% elsif competition.ganador.blank? %>
+                <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                    <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                <% end %>
+            <% else %>
+                <span></span>
+            <% end %>
+        </li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+            <% if competition&.ganador == competition.bebe_2 %>
+                <strong><%= competition.bebe_2.nombre %></strong>
+            <% elsif competition.ganador.present? %>
+                <del><%= competition.bebe_2.nombre %></del>
+            <% else %>
+                <%= competition.bebe_2.nombre %>
+            <% end %>
+
+            <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                <span></span>
+            <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                    <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                <% end %>
+            <% elsif competition.ganador.blank? %>
+                <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                    <%= form.hidden_field :competition_id, value: competition.id %>
+                    <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                    <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                <% end %>
+            <% else %>
+                <span></span>
+            <% end %>
+        </li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+
+  </ul>
+  <ul class="round round-2">
+    <li class="spacer">&nbsp;</li>
+    
+    <% if competicion_derecha_ronda_2.any? %>
+        <% competicion_derecha_ronda_2.each do |competition|  %>
+            <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+                <% if competition&.ganador == competition.bebe_1 %>
+                    <strong><%= competition.bebe_1.nombre %></strong>
+                <% elsif competition.ganador.present? %>
+                    <del><%= competition.bebe_1.nombre %></del>
+                <% else %>
+                    <%= competition.bebe_1.nombre %>
+                <% end %>
+
+                <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                    <span></span>
+                <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                    <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                        <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                    <% end %>
+                <% elsif competition.ganador.blank? %>
+                    <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                        <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                    <% end %>
+                <% else %>
+                    <span></span>
+                <% end %>
+            </li>
+            <li class="game game-spacer">&nbsp;</li>
+            <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+                <% if competition&.ganador == competition.bebe_2 %>
+                    <strong><%= competition.bebe_2.nombre %></strong>
+                <% elsif competition.ganador.present? %>
+                    <del><%= competition.bebe_2.nombre %></del>
+                <% else %>
+                    <%= competition.bebe_2.nombre %>
+                <% end %>
+
+                <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                    <span></span>
+                <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                    <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                        <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                    <% end %>
+                <% elsif competition.ganador.blank? %>
+                    <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                        <%= form.hidden_field :competition_id, value: competition.id %>
+                        <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                        <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                    <% end %>
+                <% else %>
+                    <span></span>
+                <% end %>
+            </li>
+            <li class="spacer">&nbsp;</li>
+            <% if competicion_derecha_ronda_2.count == 1 %>
+                <li class="game game-top"></li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom "></li>
+                <li class="spacer">&nbsp;</li>
+            <% end %>
+        <% end %>
+    <% else %>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+    
+  </ul>
+  <ul class="round round-3">
+    <li class="spacer">&nbsp;</li>
+    
+    <% if competicion_derecha_ronda_3.any? %>
+        <% competicion_derecha_ronda_3.each do |competition|  %>
+                <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
+                    <% if competition&.ganador == competition.bebe_1 %>
+                        <strong><%= competition.bebe_1.nombre %></strong>
+                    <% elsif competition.ganador.present? %>
+                        <del><%= competition.bebe_1.nombre %></del>
+                    <% else %>
+                        <%= competition.bebe_1.nombre %>
+                    <% end %>
+
+                    <% if voted_by_user?(competition, competition.bebe_2, current_user)%>
+                        <span></span>
+                    <% elsif !voted_by_user?(competition, competition.bebe_1, current_user) %>
+                        <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                            <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                        <% end %>
+                    <% elsif competition.ganador.blank? %>
+                        <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_1.id %>
+                            <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                        <% end %>
+                    <% else %>
+                        <span></span>
+                    <% end %>
+                </li>
+                <li class="game game-spacer">&nbsp;</li>
+                <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
+                    <% if competition&.ganador == competition.bebe_2 %>
+                        <strong><%= competition.bebe_2.nombre %></strong>
+                    <% elsif competition.ganador.present? %>
+                        <del><%= competition.bebe_2.nombre %></del>
+                    <% else %>
+                        <%= competition.bebe_2.nombre %>
+                    <% end %>
+
+                    <% if voted_by_user?(competition, competition.bebe_1, current_user)%>
+                        <span></span>
+                    <% elsif !voted_by_user?(competition, competition.bebe_2, current_user) %>
+                        <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                            <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                        <% end %>
+                    <% elsif competition.ganador.blank? %>
+                        <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                            <%= form.hidden_field :competition_id, value: competition.id %>
+                            <%= form.hidden_field :bebe_id, value: competition.bebe_2.id %>
+                            <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                        <% end %>
+                    <% else %>
+                        <span></span>
+                    <% end %>
+                </li>
+                <li class="spacer">&nbsp;</li>
+        <% end %>
+    <% else %>
+        <li class="game game-top"></li>
+        <li class="game game-spacer">&nbsp;</li>
+        <li class="game game-bottom "></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+  </ul>
+  <ul class="round round-4">
+    <li class="spacer">&nbsp;</li>
+    
+    <% if @final_femenina.present? %>
+            <li class="game game-top d-flex justify-content-between <% @final_femenina.ganador == @final_femenina.bebe_2 ? 'winner' : ''%>">
+                <% if @final_femenina&.ganador == @final_femenina.bebe_2 %>
+                    <strong><%= @final_femenina.bebe_2.nombre %></strong>
+                <% elsif @final_femenina.ganador.present? %>
+                    <del><%= @final_femenina.bebe_2.nombre %></del>
+                <% else %>
+                    <%= @final_femenina.bebe_2.nombre %>
+                <% end %>
+
+                <% if voted_by_user?(@final_femenina, @final_femenina.bebe_1, current_user)%>
+                    <span></span>
+                <% elsif !voted_by_user?(@final_femenina, @final_femenina.bebe_2, current_user) %>
+                    <%= form_with(url: competition_vote_path, method: :post) do |form| %>
+                        <%= form.hidden_field :competition_id, value: @final_femenina.id %>
+                        <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_2.id %>
+                        <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
+                    <% end %>
+                <% elsif competition.ganador.blank? %>
+                    <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
+                        <%= form.hidden_field :competition_id, value: @final_femenina.id %>
+                        <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_2.id %>
+                        <%= form.submit 'X', class:"text-decoration-none border rounded shadow bg-danger" %>
+                    <% end %>
+                <% else %>
+                    <span></span>
+                <% end %>
+            </li>
+            <li class="spacer">&nbsp;</li>
+    <% else %>
+        <li class="game game-top"></li>
+        <li class="spacer">&nbsp;</li>
+    <% end %>
+  </ul>
+</main>

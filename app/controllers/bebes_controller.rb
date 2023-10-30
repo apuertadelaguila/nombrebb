@@ -2,43 +2,32 @@ class BebesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @bebes = Bebe.all
+        @bebes = Bebe.order(puntuacion: :desc)
         @new_bebe = Bebe.new
     end
 
     def create
-        @bebe = Bebe.new(bebe_params)
-        @bebe.created_by = current_user
-        set_prioridad
+        if Bebe.where(created_by: current_user, sexo: bebe_params[:sexo]).count < 8
+            @bebe = Bebe.new(bebe_params)
+            @bebe.created_by = current_user
 
-        if @bebe.save
-          # Manejar el éxito de la creación del bebé
-          flash[:notice] = 'Bebé creado exitosamente.'
-          redirect_to :bebes
+            if @bebe.save
+            # Manejar el éxito de la creación del bebé
+            flash[:notice] = 'Bebé creado exitosamente.'
+            redirect_to :bebes
+            else
+            # Manejar errores de validación o creación
+            redirect_back fallback_location: root_path, alert: 'No se pudo crear el nombre del bebé.'
+            end
         else
-          # Manejar errores de validación o creación
-          redirect_back fallback_location: root_path, alert: 'No se pudo crear el nombre del bebé.'
+            redirect_back fallback_location: root_path, alert: 'Has creado el máximo de bebés.'
         end
-      end
+    end
     
       
-      private
-    
-      def bebe_params
-        params.require(:bebe).permit(:nombre, :prioridad, :sexo)
-      end
+    private
 
-      def set_prioridad
-        roles = current_user.roles.map(&:name)
-        case
-        when roles.include?('padres')
-            @bebe.prioridad = 'Alta'
-        when roles.include?('familia')
-            @bebe.prioridad = 'Media'  
-        when roles.include?('amigo')
-            @bebe.prioridad = 'Baja'
-        else
-            @bebe.prioridad = 'Baja'
-        end
+    def bebe_params
+        params.require(:bebe).permit(:nombre, :prioridad, :sexo)
     end
 end
