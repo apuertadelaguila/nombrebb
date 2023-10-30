@@ -87,4 +87,3 @@ production:
   encoding: unicode
   pool: <%= ENV.fetch("DB_POOL") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
-   
