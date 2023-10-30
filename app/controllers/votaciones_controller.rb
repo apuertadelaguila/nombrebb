@@ -4,8 +4,6 @@ class VotacionesController < ApplicationController
     def mostrar_duelo
         @usuario_actual = current_user
         @pares_de_nombres = generar_pares_de_nombres
-
-        #@pares_no_votados = filtrar_pares_no_votados(@usuario_actual, @pares_de_nombres)
       
         if @pares_de_nombres.empty?
             flash[:notice] = '¡Has completado el juego!'
