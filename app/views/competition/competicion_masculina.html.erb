@@ -13,11 +13,11 @@
     <% competicion_izquierda_ronda_1.each do |competition|  %>
         <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
             <% if competition&.ganador == competition.bebe_1 %>
-                <strong><%= competition.bebe_1.nombre %></strong>
+                <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
             <% elsif competition.ganador.present? %>
-                <del><%= competition.bebe_1.nombre %></del>
+                <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
             <% else %>
-                <%= competition.bebe_1.nombre %>
+                <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
             <% end %>
 
             <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -41,11 +41,11 @@
         <li class="game game-spacer">&nbsp;</li>
         <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
             <% if competition&.ganador == competition.bebe_2 %>
-                <strong><%= competition.bebe_2.nombre %></strong>
+                <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
             <% elsif competition.ganador.present? %>
-                <del><%= competition.bebe_2.nombre %></del>
+                <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
             <% else %>
-                <%= competition.bebe_2.nombre %>
+                <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
             <% end %>
 
             <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present? %>
@@ -77,11 +77,11 @@
         <% competicion_izquierda_ronda_2.each do |competition|  %>
             <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
                 <% if competition&.ganador == competition.bebe_1 %>
-                    <strong><%= competition.bebe_1.nombre %></strong>
+                    <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
                 <% elsif competition.ganador.present? %>
-                    <del><%= competition.bebe_1.nombre %></del>
+                    <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
                 <% else %>
-                    <%= competition.bebe_1.nombre %>
+                    <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
                 <% end %>
 
                 <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -105,11 +105,11 @@
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
                 <% if competition&.ganador == competition.bebe_2 %>
-                    <strong><%= competition.bebe_2.nombre %></strong>
+                    <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
                 <% elsif competition.ganador.present? %>
-                    <del><%= competition.bebe_2.nombre %></del>
+                    <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
                 <% else %>
-                    <%= competition.bebe_2.nombre %>
+                    <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
                 <% end %>
 
                 <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present?%>
@@ -158,11 +158,11 @@
         <% competicion_izquierda_ronda_3.each do |competition|  %>
                 <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
                     <% if competition&.ganador == competition.bebe_1 %>
-                        <strong><%= competition.bebe_1.nombre %></strong>
+                        <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
                     <% elsif competition.ganador.present? %>
-                        <del><%= competition.bebe_1.nombre %></del>
+                        <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
                     <% else %>
-                        <%= competition.bebe_1.nombre %>
+                        <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
                     <% end %>
 
                     <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -186,11 +186,11 @@
                 <li class="game game-spacer">&nbsp;</li>
                 <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
                     <% if competition&.ganador == competition.bebe_2 %>
-                        <strong><%= competition.bebe_2.nombre %></strong>
+                        <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
                     <% elsif competition.ganador.present? %>
-                        <del><%= competition.bebe_2.nombre %></del>
+                        <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
                     <% else %>
-                        <%= competition.bebe_2.nombre %>
+                        <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
                     <% end %>
 
                     <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present?%>
@@ -225,11 +225,11 @@
     <% if @final_masculina.present? %>
         <li class="game game-top d-flex justify-content-between <% @final_masculina.ganador == @final_masculina.bebe_1 ? 'winner' : ''%>">
             <% if @final_masculina&.ganador == @final_masculina.bebe_1 %>
-                <strong><%= @final_masculina.bebe_1.nombre %></strong>
+                <strong class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_1.nombre %></strong>
             <% elsif @final_masculina.ganador.present? %>
-                <del><%= @final_masculina.bebe_1.nombre %></del>
+                <del class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_1.nombre %></del>
             <% else %>
-                <%= @final_masculina.bebe_1.nombre %>
+                <span class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_1.nombre %></span>
             <% end %>
             <% if voted_by_user?(@final_masculina, @final_masculina.bebe_2, current_user) || competition.ganador.present?%>
                 <span></span>
@@ -264,11 +264,11 @@
     <% competicion_derecha_ronda_1.each do |competition|  %>
         <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
             <% if competition&.ganador == competition.bebe_1 %>
-                <strong><%= competition.bebe_1.nombre %></strong>
+                <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
             <% elsif competition.ganador.present? %>
-                <del><%= competition.bebe_1.nombre %></del>
+                <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
             <% else %>
-                <%= competition.bebe_1.nombre %>
+                <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
             <% end %>
 
             <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -292,11 +292,11 @@
         <li class="game game-spacer">&nbsp;</li>
         <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
             <% if competition&.ganador == competition.bebe_2 %>
-                <strong><%= competition.bebe_2.nombre %></strong>
+                <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
             <% elsif competition.ganador.present? %>
-                <del><%= competition.bebe_2.nombre %></del>
+                <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
             <% else %>
-                <%= competition.bebe_2.nombre %>
+                <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
             <% end %>
 
             <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present? %>
@@ -328,11 +328,11 @@
         <% competicion_derecha_ronda_2.each do |competition|  %>
             <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
                 <% if competition&.ganador == competition.bebe_1 %>
-                    <strong><%= competition.bebe_1.nombre %></strong>
+                    <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
                 <% elsif competition.ganador.present? %>
-                    <del><%= competition.bebe_1.nombre %></del>
+                    <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
                 <% else %>
-                    <%= competition.bebe_1.nombre %>
+                    <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
                 <% end %>
 
                 <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -356,11 +356,11 @@
             <li class="game game-spacer">&nbsp;</li>
             <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
                 <% if competition&.ganador == competition.bebe_2 %>
-                    <strong><%= competition.bebe_2.nombre %></strong>
+                    <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
                 <% elsif competition.ganador.present? %>
-                    <del><%= competition.bebe_2.nombre %></del>
+                    <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
                 <% else %>
-                    <%= competition.bebe_2.nombre %>
+                    <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
                 <% end %>
 
                 <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present? %>
@@ -409,11 +409,11 @@
         <% competicion_derecha_ronda_3.each do |competition|  %>
                 <li class="game game-top d-flex justify-content-between <% competition&.ganador == competition.bebe_1 ? 'winner' : ''%>">
                     <% if competition&.ganador == competition.bebe_1 %>
-                        <strong><%= competition.bebe_1.nombre %></strong>
+                        <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></strong>
                     <% elsif competition.ganador.present? %>
-                        <del><%= competition.bebe_1.nombre %></del>
+                        <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></del>
                     <% else %>
-                        <%= competition.bebe_1.nombre %>
+                        <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_1.nombre %></span>
                     <% end %>
 
                     <% if voted_by_user?(competition, competition.bebe_2, current_user) || competition.ganador.present? %>
@@ -437,11 +437,11 @@
                 <li class="game game-spacer">&nbsp;</li>
                 <li class="game game-bottom d-flex justify-content-between <% competition&.ganador == competition.bebe_2 ? 'winner' : ''%>">
                     <% if competition&.ganador == competition.bebe_2 %>
-                        <strong><%= competition.bebe_2.nombre %></strong>
+                        <strong class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></strong>
                     <% elsif competition.ganador.present? %>
-                        <del><%= competition.bebe_2.nombre %></del>
+                        <del class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></del>
                     <% else %>
-                        <%= competition.bebe_2.nombre %>
+                        <span class="border p-1 bg-light shadow rounded"><%= competition.bebe_2.nombre %></span>
                     <% end %>
 
                     <% if voted_by_user?(competition, competition.bebe_1, current_user) || competition.ganador.present? %>
@@ -477,11 +477,11 @@
     <% if @final_masculina.present? %>
             <li class="game game-top d-flex justify-content-between <% @final_masculina.ganador == @final_masculina.bebe_2 ? 'winner' : ''%>">
                 <% if @final_masculina&.ganador == @final_masculina.bebe_2 %>
-                    <strong><%= @final_masculina.bebe_2.nombre %></strong>
+                    <strong class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_2.nombre %></strong>
                 <% elsif @final_masculina.ganador.present? %>
-                    <del><%= @final_masculina.bebe_2.nombre %></del>
+                    <del class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_2.nombre %></del>
                 <% else %>
-                    <%= @final_masculina.bebe_2.nombre %>
+                    <span class="border p-1 bg-light shadow rounded"><%= @final_masculina.bebe_2.nombre %></span>
                 <% end %>
 
                 <% if voted_by_user?(@final_masculina, @final_masculina.bebe_1, current_user) || @final_masculina.ganador.present? %>
