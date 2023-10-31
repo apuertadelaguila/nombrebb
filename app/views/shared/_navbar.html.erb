@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <%= link_to 'Lista', bebes_path, class:"nav-link #{'active' if current_page?(bebes_path)}" %>
                 </li>
-                <% if bracket_generated? %>
+                <% if !bracket_generated? && all_babies_created? %>
                     <li class="nav-item">
                         <%= link_to 'Vota!', votacions_path, class:"nav-link #{'active' if current_page?(votacions_path)}" %>
                     </li>

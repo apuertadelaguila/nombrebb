@@ -18,7 +18,12 @@ module CompetitionHelper
     end
 
     def bracket_generated?
-        return false if Competition.all.any?
-        true
+        return true if Competition.all.any?
+        false
+    end
+
+    def all_babies_created?
+        return true if Bebe.all.count == 16
+        false
     end
 end

@@ -3,7 +3,6 @@ class CompetitionController < ApplicationController
 
     before_action :authenticate_user!
     before_action :check_all_users_voted, only: [:competicion_femenina, :competicion_masculina]
-    after_action :next_round_for_high_priority_bebes, only: [:generar_cuadros]
 
     IZQUIERDA = 'izquierda'
     DERECHA = 'derecha'
@@ -111,19 +110,6 @@ class CompetitionController < ApplicationController
         unless all_users_voted?
             flash[:alert] = "¡No todos los usuarios han votado!"
             redirect_back(fallback_location: bebes_path)
-        end
-    end
-
-    def next_round_for_high_priority_bebes
-        competitions = Competition.joins("LEFT JOIN bebes ON bebes.id = competitions.bebe_1 OR bebes.id = competitions.bebe_2").where("bebes.prioridad = 0")
-        competitions.each do |c|
-            if c.bebe_1.prioridad == 0
-                c.ganador = c.bebe_1
-                c.save!
-            else
-                c.ganador = c.bebe_2
-                c.save!
-            end
         end
     end
 end

@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Prioridad</th>
+                    <th>Papá/Mamá:</th>
                     <th>Puntuación</th>
                 </tr>
             </thead>
@@ -24,7 +24,7 @@
                     <% if bebe.sexo == 'Hombre' %>
                         <tr>
                             <td><%= bebe.nombre %></td>
-                            <td><%= bebe.prioridad %></td>
+                            <td><%= bebe.created_by.nombre %></td>
                             <td><%= bebe&.puntuacion %></td>
                         </tr>
                     <% end %>
@@ -42,7 +42,7 @@
             <thead>
                 <tr>
                 <th>Nombre</th>
-                <th>Prioridad</th>
+                <th>Mamá/Papá:</th>
                 <th>Puntuación</th>
                 </tr>
             </thead>
@@ -51,7 +51,7 @@
                     <% if bebe.sexo == 'Mujer' %>
                         <tr>
                         <td><%= bebe.nombre %></td>
-                        <td><%= bebe.prioridad %></td>
+                        <td><%= bebe.created_by.nombre %></td>
                         <td><%= bebe&.puntuacion %></td>
                         </tr>
                     <% end %>
@@ -71,13 +71,13 @@
     <div>
         
 
-        <% if all_users_voted? && bracket_generated? %>
+        <% if all_users_voted? && !bracket_generated? %>
             <%= button_to 'Generar Cuadros', crear_cuadro_path, method: :post, class: 'btn btn-danger' %> 
         <% end %>
     </div>
 </div>
 
-<% if current_user.votacions.any? && bracket_generated? %>
+<% if current_user.votacions.any? && !bracket_generated? %>
     <button type="button" class="btn btn-danger mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal2">
         Reinicia tus votos
     </button>
