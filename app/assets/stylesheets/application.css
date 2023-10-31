@@ -256,6 +256,10 @@ main{
 .font-edu {
     font-family: 'Edu TAS Beginner';
 }
+
+.font-play {
+    font-family: 'Playfair Display';
+}
     
 @keyframes animate {
     0% {
