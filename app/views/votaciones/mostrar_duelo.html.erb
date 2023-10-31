@@ -1,6 +1,6 @@
 <div class="form d-flex align-items-center justify-content-center">
   <fieldset>
-    <legend class="p-2">Elige un nombre: </legend>
+    <legend class="p-2 text-info">Elige un nombre: </legend>
 
     <%= form_for @votacion do |f| %>
       <%= f.hidden_field :user_id, value: @usuario_actual.id %>
@@ -12,13 +12,13 @@
         <% [@bebe_1, @bebe_2].each do |bebe| %>
 
           <div class="a justify-content-between">
-            <label for="vanilla" class="me-3"><%= bebe.nombre %></label>
+            <label for="vanilla" class="me-3 text-info"><%= bebe.nombre %></label>
             <%= f.radio_button :bebe_id, bebe.id, id: "bebe_#{bebe.id}", class: "nombre-radio" %>
           </div>
 
         <% end %>
 
-        <%= f.submit "Votar", class: "btn btn-primary d-block mx-auto px-5" %>
+        <%= f.submit "Votar", class: "btn btn-outline-info d-block mx-auto px-5" %>
       </div>
     <% end %>
   </fieldset>
