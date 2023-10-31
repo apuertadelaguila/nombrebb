@@ -11,7 +11,7 @@
             <%= link_to 'Cuadro masculino', cuadro_masculino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
         <% end %>
         <h2 class="text-center nombres-titulo font-edu">Nombres Masculinos</h2>
-        <table class="table table-light table-hover m-auto text-center">
+        <table class="table table-light table-hover m-auto text-center font-play">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -19,7 +19,7 @@
                     <th>Puntuación</th>
                 </tr>
             </thead>
-            <tbody class="font-play">
+            <tbody>
                 <% @bebes.each do |bebe| %>
                     <% if bebe.sexo == 'Hombre' %>
                         <tr>
@@ -38,7 +38,7 @@
             <%= link_to 'Cuadro femenino', cuadro_femenino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
         <% end %>
         <h2 class="text-center nombres-titulo font-edu">Nombres Femeninos</h2>
-        <table class="table table-light table-hover m-auto text-center">
+        <table class="table table-light table-hover m-auto text-center font-play">
             <thead>
                 <tr>
                 <th>Nombre</th>
@@ -46,7 +46,7 @@
                 <th>Puntuación</th>
                 </tr>
             </thead>
-            <tbody class="font-play">
+            <tbody>
                 <% @bebes.each do |bebe| %>
                     <% if bebe.sexo == 'Mujer' %>
                         <tr>
