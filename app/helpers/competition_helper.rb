@@ -26,4 +26,9 @@ module CompetitionHelper
         return true if Bebe.all.count == 32
         false
     end
+
+    def winner?(gender)
+        return true if Competition.where(ronda: 4, sexo: gender).where.not(ganador: nil).any?
+        false
+    end
 end

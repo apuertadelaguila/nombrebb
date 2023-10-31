@@ -7,9 +7,14 @@
 
 <div class="d-md-flex flex-md-row">
     <div class="col-md-6 mb-3 me-4">
-        <% if Competition.first.present? %>
-            <%= link_to 'Cuadro masculino', cuadro_masculino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
+        <% if bracket_generated? %>
+            <%= link_to 'Cuadro masculino', cuadro_masculino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3 mb-3"%>
         <% end %>
+
+        <% if winner?('Hombre') %>
+            <%= link_to 'Ganador', ganador_masculino_path ,class:"btn btn-outline-success text-decoration-none mt-3 ms-3 mb-3"%>
+        <% end %>
+
         <h2 class="text-center nombres-titulo font-edu">Nombres Masculinos</h2>
         <table class="table table-light table-hover m-auto text-center font-play">
             <thead>
@@ -34,9 +39,14 @@
     </div>
 
     <div class="col-md-6">
-        <% if Competition.first.present? %>
-            <%= link_to 'Cuadro femenino', cuadro_femenino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
+        <% if bracket_generated? %>
+            <%= link_to 'Cuadro femenino', cuadro_femenino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3 mb-3"%>
         <% end %>
+
+        <% if winner?('Mujer') %>
+            <%= link_to 'Ganadora', ganador_femenino_path ,class:"btn btn-outline-success text-decoration-none mt-3 ms-3 mb-3"%>
+        <% end %>
+
         <h2 class="text-center nombres-titulo font-edu">Nombres Femeninos</h2>
         <table class="table table-light table-hover m-auto text-center font-play">
             <thead>
