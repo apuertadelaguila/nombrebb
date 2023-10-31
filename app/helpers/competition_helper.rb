@@ -23,7 +23,7 @@ module CompetitionHelper
     end
 
     def all_babies_created?
-        return true if Bebe.all.count == 16
+        return true if Bebe.all.count == 32
         false
     end
 end
