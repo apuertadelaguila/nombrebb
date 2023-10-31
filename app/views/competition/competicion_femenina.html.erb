@@ -5,7 +5,7 @@
 <% competicion_izquierda_ronda_3 = @competitions_izquierda_femenina&.select { |c| c.ronda == 3 } %>
 <% competicion_derecha_ronda_3 = @competitions_derecha_femenina&.select { |c| c.ronda == 3 } %>
 
-<h1>Cuadrante masculino de nombres de BEBÉS!!!!</h1>
+<h1 class="font-edu">Cuadrante femenino</h1>
 <main id="tournament">
   <ul class="round round-1">
     <li class="spacer">&nbsp;</li>
@@ -231,7 +231,7 @@
             <% else %>
                 <span class="border p-1 bg-light shadow rounded"><%= @final_femenina.bebe_1.nombre %></span>
             <% end %>
-            <% if voted_by_user?(@final_femenina, @final_femenina.bebe_2, current_user) || competition.ganador.present?%>
+            <% if voted_by_user?(@final_femenina, @final_femenina.bebe_2, current_user) || @final_femenina.ganador.present? %>
                 <span></span>
             <% elsif !voted_by_user?(@final_femenina, @final_femenina.bebe_1, current_user) %>
                 <%= form_with(url: competition_vote_path, method: :post) do |form| %>
@@ -239,7 +239,7 @@
                     <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_1.id %>
                     <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
                 <% end %>
-            <% elsif competition.ganador.blank? %>
+            <% elsif @final_femenina.ganador.blank? %>
                 <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
                     <%= form.hidden_field :competition_id, value: @final_femenina.id %>
                     <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_1.id %>

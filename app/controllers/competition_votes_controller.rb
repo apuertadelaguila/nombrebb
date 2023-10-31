@@ -12,8 +12,13 @@ class CompetitionVotesController < ApplicationController
                 competition = Competition.find(@competition_vote.competition.id)
                 competition.ganador = @competition_vote.bebe
                 competition.save!
-                if competition.ronda == 4
-                    redirect_back fallback_location: root_path, notice: 'Tenemos ganador' and return
+
+                if competition.ronda == 4 && competition.sexo == 'Hombre'
+                    redirect_to ganador_masculino_path, notice: 'Tenemos ganador' and return
+                end
+
+                if competition.ronda == 4 && competition.sexo == 'Mujer'
+                    redirect_to ganador_femenino_path, notice: 'Tenemos ganador' and return
                 end
             end
 

@@ -10,7 +10,7 @@
         <% if Competition.first.present? %>
             <%= link_to 'Cuadro masculino', cuadro_masculino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
         <% end %>
-        <h2 class="text-center nombres-titulo">Nombres Masculinos</h2>
+        <h2 class="text-center nombres-titulo font-edu">Nombres Masculinos</h2>
         <table class="table table-light table-hover m-auto text-center">
             <thead>
                 <tr>
@@ -37,7 +37,7 @@
         <% if Competition.first.present? %>
             <%= link_to 'Cuadro femenino', cuadro_femenino_path ,class:"btn btn-outline-secondary text-decoration-none mt-3"%>
         <% end %>
-        <h2 class="text-center nombres-titulo">Nombres Femeninos</h2>
+        <h2 class="text-center nombres-titulo font-edu">Nombres Femeninos</h2>
         <table class="table table-light table-hover m-auto text-center">
             <thead>
                 <tr>
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="w-100 mt-3 d-flex flex-column">
+<div class="w-100 my-3 d-flex flex-column">
     <div class="d-flex justify-content-around">
         <% if Competition.first.present? %>
             <%= link_to 'Cuadro masculino', cuadro_masculino_path ,class:"btn btn-outline-secondary text-decoration-none"%>
@@ -72,13 +72,13 @@
         
 
         <% if all_users_voted? && !bracket_generated? %>
-            <%= button_to 'Generar Cuadros', crear_cuadro_path, method: :post, class: 'btn btn-danger' %> 
+            <%= button_to 'Generar Cuadros', crear_cuadro_path, method: :post, class: 'btn btn-outline-success' %> 
         <% end %>
     </div>
 </div>
 
 <% if current_user.votacions.any? && !bracket_generated? %>
-    <button type="button" class="btn btn-danger mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+    <button type="button" class="btn btn-outline-danger my-4" data-bs-toggle="modal" data-bs-target="#exampleModal2">
         Reinicia tus votos
     </button>
 <% end %>

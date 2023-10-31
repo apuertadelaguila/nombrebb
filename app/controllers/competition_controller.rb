@@ -34,6 +34,14 @@ class CompetitionController < ApplicationController
         end
     end
 
+    def ganador_masculino
+        @ganador = Competition.where(ronda: 4, sexo: 'Hombre').first.ganador
+    end
+
+    def ganador_femenino
+        @ganadora = Competition.where(ronda: 4, sexo: 'Mujer').first.ganador
+    end
+
     private
 
     def generar_cuadro(sexo)
