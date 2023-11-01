@@ -492,7 +492,7 @@
                         <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_2.id %>
                         <%= form.submit '✓', class:"text-decoration-none border rounded shadow bg-info" %>
                     <% end %>
-                <% elsif competition.ganador.blank? %>
+                <% elsif @final_femenina.ganador.blank? %>
                     <%= form_with(url: competition_vote_delete_path, method: :delete) do |form| %>
                         <%= form.hidden_field :competition_id, value: @final_femenina.id %>
                         <%= form.hidden_field :bebe_id, value: @final_femenina.bebe_2.id %>
